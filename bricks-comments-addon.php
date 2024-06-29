@@ -20,10 +20,33 @@ class Bricks_Comments_Addon {
 	public function __construct() {
 		add_filter( 'bricks/elements/post-comments/controls', [ $this, 'bca_add_controls' ] );
 		add_filter( 'bricks/element/settings', [ $this, 'bca_manipulate_frontend' ], 10, 2 );
+		add_action( 'wp_register_scripts', [ $this, 'bca_register_scripts' ] );
 	}
 	
 	/**
 	 * Register the javascript and css files for the frontend
+	 *
+	 * @return void
+	 */
+	public function bca_register_scripts() {
+		wp_register_script(
+			'bricks-comments-addon',
+			plugins_url( 'js/bricks-comments-addon.js', __FILE__ ),
+			[],
+			fileatime( __DIR__ . "/js/bricks-comments-addon.js" ),
+			true
+		);
+		
+		wp_register_style(
+			'bricks-comments-addon',
+			plugins_url( 'css/bricks-comments-addon.css', __FILE__ ),
+			[],
+			fileatime( __DIR__ . "/css/bricks-comments-addon.css" )
+		);
+	}
+	
+	/**
+	 * Enqueue the javascript and css files for the frontend
 	 *
 	 * @param $settings
 	 * @param $element
@@ -37,20 +60,6 @@ class Bricks_Comments_Addon {
 			isset( $element->settings['bcaCommentFormFirst'] ) &&
 			$element->settings['bcaCommentFormFirst']
 		) {
-			wp_register_script(
-				'bricks-comments-addon',
-				plugins_url( 'js/bricks-comments-addon.js', __FILE__ ),
-				[],
-				fileatime( __DIR__ . "/js/bricks-comments-addon.js" ),
-				true
-			);
-			wp_register_style(
-				'bricks-comments-addon',
-				plugins_url( 'css/bricks-comments-addon.css', __FILE__ ),
-				[],
-				fileatime( __DIR__ . "/css/bricks-comments-addon.css" )
-			);
-			
 			wp_enqueue_script( 'bricks-comments-addon' );
 			wp_enqueue_style( 'bricks-comments-addon' );
 		}
