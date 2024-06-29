@@ -12,7 +12,7 @@ To archive this the plugin simply determins if the box is checked. If so, it reg
 ### JS
 
 Nothing special here. Just wrapping the `.comments-title` and `.comment-list` with `<div
-class="comments__wrapper"></div>`. This automatically bringt up the for in front of the comments listing.
+class="comments__wrapper"></div>`. This automatically bringt up the form in front of the comments listing.
 
 ### CSS
 

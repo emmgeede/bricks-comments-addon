@@ -23,6 +23,14 @@ class Bricks_Comments_Addon {
 		add_filter( 'bricks/element/settings', [ $this, 'bca_manipulate_frontend' ], 10, 2 );
 	}
 	
+	/**
+	 * Register the javascript and css files for the frontend
+	 *
+	 * @param $settings
+	 * @param $element
+	 *
+	 * @return mixed
+	 */
 	public function bca_manipulate_frontend( $settings, $element ) {
 		if (
 			! is_admin() &&
@@ -30,8 +38,6 @@ class Bricks_Comments_Addon {
 			isset( $element->settings['bcaCommentFormFirst'] ) &&
 			$element->settings['bcaCommentFormFirst']
 		) {
-			//	wp_die( '<pre>' . print_r( $settings, true ) . '</pre>' );
-			
 			wp_register_script(
 				'bricks-comments-addon',
 				plugins_url( 'js/bricks-comments-addon.js', __FILE__ ),
@@ -51,12 +57,16 @@ class Bricks_Comments_Addon {
 		}
 		
 		return $settings;
-		
 	}
 	
+	/**
+	 * Add additional controls to the Bricks comment element
+	 *
+	 * @param $controls
+	 *
+	 * @return array
+	 */
 	public function bca_add_controls( $controls ) {
-		//	wp_die( '<pre>' . print_r( $controls, true ) . '</pre>' );
-		
 		$bcaCommentFormFirst['bcaCommentFormFirst'] = [
 			'tab'     => 'content',
 			'group'   => 'form',
