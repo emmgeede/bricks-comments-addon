@@ -2,15 +2,14 @@
 
 /*
 Plugin Name: Bricks Comments Addon
-Plugin URI: https://emmgee.de
+Plugin URI: https://github.com/emmgeede/bricks-comments-addon
 Description: Adds additional controls toi the Bricks comment element
-Version: 0.0.1
+Version: 1.0.0
 Author: Michael Großklos
 Author URI: https://emmgee.de
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: bricks
-Domain Path: /languages
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
