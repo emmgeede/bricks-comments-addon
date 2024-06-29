@@ -1,13 +1,12 @@
 # bricks-comments-addon
 
-It just adds a toggle control to the Bricks comments element in order to be able to push the comment form in front
-of the comments list.
+I wanted the comments form to appear above the list of comments, so I added a control to the comment element.
 
 ![image](assets/screenshot-bricks-editor.jpg)
 
 ## Technical stuff
 
-To archive this the plugin simply determins if the box is checked. If so, it registers two files (a JS and a CSS).
+To achive this the plugin simply determins if the box is checked. If so, it registers two files (a JS and a CSS).
 
 ### JS
 

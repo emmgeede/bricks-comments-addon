@@ -3,7 +3,7 @@
 /*
 Plugin Name: Bricks Comments Addon
 Plugin URI: https://github.com/emmgeede/bricks-comments-addon
-Description: Adds additional controls toi the Bricks comment element
+Description: Adds a setting to show the comment form before comments
 Version: 1.0.0
 Author: Michael Großklos
 Author URI: https://emmgee.de
