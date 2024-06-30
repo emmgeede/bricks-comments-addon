@@ -20,10 +20,37 @@ class Bricks_Comments_Addon {
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'bca_register_scripts' ] );
 		
-		add_filter( 'bricks/elements/post-comments/controls', [ $this, 'bca_add_controls' ] );
+		add_filter( 'bricks/elements/post-comments/control_groups', [ $this, 'bca_add_control_group' ], 10, 1 );
+		add_filter( 'bricks/elements/post-comments/controls', [ $this, 'bca_add_controls' ], 10, 2 );
 		add_filter( 'bricks/element/settings', [ $this, 'bca_enqueue_scripts_on_true' ], 10, 2 );
 	}
 	
+	/**
+	 * Add cusdtom control group
+	 *
+	 * @param $control_groups
+	 *
+	 * @return mixed
+	 */
+	public function bca_add_control_group( $control_groups ) {
+		$control_groups['bcaCustomGroup'] = [
+			'tab'   => 'content',
+			'title' => esc_html__( 'Custom Form Settings', 'bricks' ),
+		];
+		
+		return $control_groups;
+	}
+	
+	/**
+	 * Wrapping the comment elements with a wrapper
+	 *
+	 * @param $content
+	 * @param $post
+	 * @param $area
+	 *
+	 * @return false|string
+	 * @throws DOMException
+	 */
 	public function bca_wrap_comments_elements( $content, $post, $area ) {
 		$doc = new DOMDocument();
 		@$doc->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ), LIBXML_HTML_NOIMPLIED |
@@ -100,9 +127,9 @@ class Bricks_Comments_Addon {
 	 * @return array
 	 */
 	public function bca_add_controls( $controls ) {
-		$bcaCommentFormFirst['bcaCommentFormFirst'] = [
+		$controls['bcaCommentFormFirst'] = [
 			'tab'     => 'content',
-			'group'   => 'form',
+			'group'   => 'bcaCustomGroup',
 			'label'   => esc_html__( 'Show form before comments', 'bricks' ),
 			'type'    => 'checkbox',
 			'default' => false,
@@ -110,7 +137,25 @@ class Bricks_Comments_Addon {
 			'small'   => true,
 		];
 		
-		$controls = $this->array_insert_after( $controls, 'formTitle', $bcaCommentFormFirst );
+		$controls['bcaGridGap'] = [
+			'tab'         => 'content',
+			'group'       => 'bcaCustomGroup',
+			'label'       => esc_html__( 'Gap to form', 'bricks' ),
+			'description' => esc_html__( 'Set the gap between the comment form and the comments', 'bricks' ),
+			'type'        => 'number',
+			'default'     => 50,
+			'units'       => [ 'px', 'em', 'rem', '%' ],
+			'unit'        => 'px',
+			'inline'      => true,
+			'small'       => true,
+			'css'         => [
+				[
+					'property' => 'grid-gap',
+					'selector' => '.bricks-comments-inner',
+				],
+			],
+			'required'    => [ 'bcaCommentFormFirst', '!=', '' ],
+		];
 		
 		return $controls;
 	}
