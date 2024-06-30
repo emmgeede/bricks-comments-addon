@@ -1,3 +1,10 @@
+.bricks-comments-inner {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-columns: 1fr;
+    grid-gap: 40px;
+}
+
 .comments__wrapper {
-    margin-top: 40px;
+    order: 1;
 }

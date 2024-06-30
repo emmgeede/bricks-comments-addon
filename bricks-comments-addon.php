@@ -24,6 +24,30 @@ class Bricks_Comments_Addon {
 		add_filter( 'bricks/element/settings', [ $this, 'bca_enqueue_scripts_on_true' ], 10, 2 );
 	}
 	
+	public function bca_wrap_comments_elements( $content, $post, $area ) {
+		$doc = new DOMDocument();
+		@$doc->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ), LIBXML_HTML_NOIMPLIED |
+		                                                                            LIBXML_HTML_NODEFDTD );
+		$xpath = new DOMXPath( $doc );
+		
+		$comments_title = $xpath->query( "//*[contains(concat(' ', normalize-space(@class), ' '), ' comments-title ')]" );
+		$comment_list   = $xpath->query( "//*[contains(concat(' ', normalize-space(@class), ' '), ' comment-list ')]" );
+		
+		if ( $comments_title->length > 0 && $comment_list->length > 0 ) {
+			$wrapper = $doc->createElement( 'div' );
+			$wrapper->setAttribute( 'class', 'comments__wrapper' );
+			
+			$comments_title->item( 0 )->parentNode->insertBefore( $wrapper, $comments_title->item( 0 ) );
+			
+			$wrapper->appendChild( $comments_title->item( 0 ) );
+			$wrapper->appendChild( $comment_list->item( 0 ) );
+		}
+		
+		$newHtml = $doc->saveHTML();
+		
+		return $newHtml;
+	}
+	
 	/**
 	 * Register the javascript and css files for the frontend
 	 *
@@ -61,7 +85,7 @@ class Bricks_Comments_Addon {
 			isset( $element->settings['bcaCommentFormFirst'] ) &&
 			$element->settings['bcaCommentFormFirst']
 		) {
-			wp_enqueue_script( 'bricks-comments-addon' );
+			add_filter( 'bricks/frontend/render_data', [ $this, 'bca_wrap_comments_elements' ], 10, 3 );
 			wp_enqueue_style( 'bricks-comments-addon' );
 		}
 		
