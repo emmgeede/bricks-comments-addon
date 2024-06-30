@@ -1,4 +1,10 @@
 === Bricks Comments Addon ===
+Plugin Name: Bricks Comments Addon
+Plugin URI: https://github.com/emmgeede/bricks-comments-addon
+Description: Adds a couple of settings to the bricks comment element
+Version: 1.0.3
+Author: Michael Großklos
+Author URI: https://emmgee.de
 Tags: v1.0.2, v1.0.3
 Requires at least: 6.5
 Tested up to: 6.5
@@ -11,83 +17,46 @@ I wanted the comments form to appear above the list of comments, so I added a co
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+=== Fields ===
 
-A few notes about the sections above:
+==== Show form before comments ====
 
-* "Contributors" is a comma separated list of wordpress.org usernames
-* "Tags" is a comma separated list of tags that apply to the plugin
-* "Requires at least" is the lowest version that the plugin will work on
-* "Tested up to" is the highest version that you've *successfully used to test the plugin*
-* Stable tag must indicate the Subversion "tag" of the latest stable version
+If checked, the comments form appears before the comments.
 
-Note that the `readme.txt` value of stable tag is the one that is the defining one for the plugin.  If the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used for displaying information about the plugin.
+==== Gap ***(only visible if "Show form before comments" is checked)*** ====
 
-If you develop in trunk, you can update the trunk `readme.txt` to reflect changes in your in-development version, without having that information incorrectly disclosed about the current stable version that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+Sets the gap between the form and the comments below. The default unit is `px` but `em, rem, %` units can also be used.
 
-If no stable tag is provided, your users may not get the correct version of your code.
+==== Form Label ====
 
-== Frequently Asked Questions ==
+The standard label of the form is `Comment *`. With this field it can be changed to what ever you want. The `*` will be
+included automatically so leave it out.
 
-= A question that someone might have =
+If you want to change the CSS of the `*` you can use the `.required` class or target the `<span>` within the `<label
+for="comment">`.
 
-An answer to that question.
+=== Technical stuff ===
 
-= What about foo bar? =
+If the setting is true, the elements `.comments-title` and `.comment-list` will be wrapped with `<div
+class="comments__wrapper"></div>` and a CSS file will be enqueued.
 
-Answer to foo bar dilemma.
+It also adds a skiplink to the comments form right after `<div id='comments'>`.
+
+==== CSS ====
+
+The `.bricks-comments-inner` will get `display: grid` and `.comments_wrapper`will get `order: 1`.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
-2. This is the second screen shot
+![image](assets/screenshot-bricks-editor-custom-form-area.jpg)
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
+= 1.0.3 =
+* Adding update functionalities
+* New Feature: Form Gap
+* New Feature: Form Label Text
 
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== A brief Markdown Example ==
-
-Markdown is what the parser uses to process much of the readme file.
-
-[markdown syntax]: https://daringfireball.net/projects/markdown/syntax
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Links require brackets and parenthesis:
-
-Here's a link to [WordPress](https://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax]. Link titles are optional, naturally.
-
-Blockquotes are email style:
-
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-And Backticks for code:
-
-`<?php code(); ?>`
+= 1.0.2 =
+* First release
