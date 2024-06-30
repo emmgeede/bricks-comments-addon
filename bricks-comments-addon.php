@@ -142,21 +142,22 @@ class Bricks_Comments_Addon {
 		];
 		
 		$controls['bcaGridGap'] = [
-			'tab'      => 'content',
-			'group'    => 'bcaCustomGroup',
-			'label'    => esc_html__( 'Gap between form and comments', 'bricks' ),
-			'type'     => 'number',
-			'default'  => 50,
-			'units'    => true,
-			'inline'   => true,
-			'small'    => true,
-			'css'      => [
+			'tab'         => 'content',
+			'group'       => 'bcaCustomGroup',
+			'label'       => esc_html__( 'Gap', 'bricks' ),
+			'description' => esc_html__( 'Gap between form and comments', 'bricks' ),
+			'type'        => 'number',
+			'default'     => 50,
+			'units'       => true,
+			'inline'      => true,
+			'small'       => true,
+			'css'         => [
 				[
 					'property' => 'grid-gap',
 					'selector' => '.bricks-comments-inner',
 				],
 			],
-			'required' => [ 'bcaCommentFormFirst', '!=', '' ],
+			'required'    => [ 'bcaCommentFormFirst', '!=', '' ],
 		];
 		
 		return $controls;
