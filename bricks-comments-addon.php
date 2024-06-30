@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Bricks Comments Addon
+Plugin Name: Bricks Comments Addon 1
 Plugin URI: https://github.com/emmgeede/bricks-comments-addon
 Description: Adds a couple of settings to the bricks comment element
 Vsersion: 1.0.3
