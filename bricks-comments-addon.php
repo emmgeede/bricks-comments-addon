@@ -144,8 +144,7 @@ class Bricks_Comments_Addon {
 			'description' => esc_html__( 'Set the gap between the comment form and the comments', 'bricks' ),
 			'type'        => 'number',
 			'default'     => 50,
-			'units'       => [ 'px', 'em', 'rem', '%' ],
-			'unit'        => 'px',
+			'units'       => true,
 			'inline'      => true,
 			'small'       => true,
 			'css'         => [
