@@ -5,7 +5,7 @@ Plugin Name: Bricks Comments Addon
 Plugin URI: https://github.com/emmgeede/bricks-comments-addon
 Description: Adds a setting to show the comment form before comments
 Version: 1.0.0
-Author: Michael Großklos
+$Author: Michael Großklos
 Author URI: https://emmgee.de
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,9 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Bricks_Comments_Addon {
 	public function __construct() {
+		add_action( 'wp_enqueue_scripts', [ $this, 'bca_register_scripts' ] );
+		
 		add_filter( 'bricks/elements/post-comments/controls', [ $this, 'bca_add_controls' ] );
-		add_filter( 'bricks/element/settings', [ $this, 'bca_manipulate_frontend' ], 10, 2 );
-		add_action( 'wp_register_scripts', [ $this, 'bca_register_scripts' ] );
+		add_filter( 'bricks/element/settings', [ $this, 'bca_enqueue_scripts_on_true' ], 10, 2 );
 	}
 	
 	/**
@@ -53,7 +54,7 @@ class Bricks_Comments_Addon {
 	 *
 	 * @return mixed
 	 */
-	public function bca_manipulate_frontend( $settings, $element ) {
+	public function bca_enqueue_scripts_on_true( $settings, $element ) {
 		if (
 			! is_admin() &&
 			$element->name == 'post-comments' &&
