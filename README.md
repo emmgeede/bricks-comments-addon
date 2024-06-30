@@ -12,7 +12,7 @@ If checked, the comments form appears before the comments.
 
 ### Gap ***(only visible if "Show form before comments" is checked)***
 
-Sets the gap between the form and the comments below. The default unit s `px` but `em, rem, %` units can also be used.
+Sets the gap between the form and the comments below. The default unit is `px` but `em, rem, %` units can also be used.
 
 ### Form Label
 
