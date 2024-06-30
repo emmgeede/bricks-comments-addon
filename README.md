@@ -32,3 +32,15 @@ It also adds a skiplink to the comments form right after `<div id='comments'>`.
 ### CSS
 
 The `.bricks-comments-inner` will get `display: grid` and `.comments_wrapper`will get `order: 1`.
+
+## Changelog
+
+#### 1.0.3
+
+* Adding update functionalities
+* New Feature: Form Gap
+* New Feature: Form Label Text
+
+#### 1.0.2
+
+* First release

@@ -3,7 +3,7 @@ Plugin Name: Bricks Comments Addon
 Plugin URI: https://github.com/emmgeede/bricks-comments-addon
 Description: Adds a couple of settings to the bricks comment element
 Version: 1.0.3
-Author: Michael Großklos
+Author: emmgee Digitalagentur
 Author URI: https://emmgee.de
 Tags: v1.0.2, v1.0.3
 Requires at least: 6.5
@@ -16,7 +16,6 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 I wanted the comments form to appear above the list of comments, so I added a control to the comment element.
 
 == Description ==
-
 
 === Fields ===
 
