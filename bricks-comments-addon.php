@@ -3,8 +3,8 @@
 /*
 Plugin Name: Bricks Comments Addon
 Plugin URI: https://github.com/emmgeede/bricks-comments-addon
-Description: Adds a setting to show the comment form before comments
-Version: 1.0.2
+Description: Adds a couple of settings to the bricks comment element
+Vsersion: 1.0.3
 $Author: Michael Großklos
 Author URI: https://emmgee.de
 License: GPL2
@@ -16,15 +16,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require 'libs/plugin-update-checker/plugin-update-checker.php';
+
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
 class Bricks_Comments_Addon {
 	public $comment_form_label = 'Comment *';
 	
 	public function __construct() {
+		add_action( 'init', [ $this, 'bca_check_for_updates' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'bca_register_scripts' ] );
 		
 		add_filter( 'bricks/elements/post-comments/control_groups', [ $this, 'bca_add_control_group' ], 10, 1 );
 		add_filter( 'bricks/elements/post-comments/controls', [ $this, 'bca_add_controls' ], 10, 2 );
 		add_filter( 'bricks/element/settings', [ $this, 'bca_enqueue_scripts_on_true' ], 10, 2 );
+	}
+	
+	/**
+	 * Check if there are updates
+	 *
+	 * @return void
+	 */
+	public function bca_check_for_updates() {
+		$myUpdateChecker = PucFactory::buildUpdateChecker(
+			'https://github.com/emmgeede/bricks-comments-addon',
+			__FILE__,
+			'bricks-comments-addon'
+		);
+		
+		$myUpdateChecker->setBranch( 'production' );
 	}
 	
 	/**
