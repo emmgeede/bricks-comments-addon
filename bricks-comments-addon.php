@@ -44,7 +44,7 @@ class Bricks_Comments_Addon {
 			'bricks-comments-addon'
 		);
 		
-		$myUpdateChecker->setBranch( 'production' );
+		$myUpdateChecker->setBranch( 'main' );
 	}
 	
 	/**
