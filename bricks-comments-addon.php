@@ -4,7 +4,7 @@
 Plugin Name: Bricks Comments Addon
 Plugin URI: https://github.com/emmgeede/bricks-comments-addon
 Description: Adds a setting to show the comment form before comments
-Version: 1.0.0
+Version: 1.0.2
 $Author: Michael Großklos
 Author URI: https://emmgee.de
 License: GPL2
@@ -17,6 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Bricks_Comments_Addon {
+	public $comment_form_label = 'Comment *';
+	
 	public function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'bca_register_scripts' ] );
 		
@@ -110,17 +112,45 @@ class Bricks_Comments_Addon {
 	 * @return mixed
 	 */
 	public function bca_enqueue_scripts_on_true( $settings, $element ) {
-		if (
-			! is_admin() &&
-			$element->name == 'post-comments' &&
-			isset( $element->settings['bcaCommentFormFirst'] ) &&
-			$element->settings['bcaCommentFormFirst']
-		) {
-			add_filter( 'bricks/frontend/render_data', [ $this, 'bca_wrap_comments_elements' ], 10, 3 );
-			wp_enqueue_style( 'bricks-comments-addon' );
+		if ( ! is_admin() ) {
+			
+			if (
+				isset( $element->settings['bcaFormLabel'] )
+				&& $element->settings['bcaFormLabel'] != ''
+			) {
+				$this->comment_form_label = $element->settings['bcaFormLabel'];
+				add_filter( 'bricks/frontend/render_data', [ $this, 'bca_change_form_label' ], 10, 3 );
+			}
+			
+			if (
+				$element->name == 'post-comments' &&
+				isset( $element->settings['bcaCommentFormFirst'] ) &&
+				$element->settings['bcaCommentFormFirst']
+			) {
+				add_filter( 'bricks/frontend/render_data', [ $this, 'bca_wrap_comments_elements' ], 10, 3 );
+				wp_enqueue_style( 'bricks-comments-addon' );
+			}
+			
 		}
 		
 		return $settings;
+	}
+	
+	/**
+	 * Change the form label
+	 *
+	 * @param $content
+	 * @param $post
+	 * @param $area
+	 *
+	 * @return mixed
+	 */
+	public function bca_change_form_label( $content, $post, $area ) {
+		$content = str_replace( '<label for="comment">Comment *</label>',
+			'<label for="comment">' . $this->comment_form_label . ' <span class="required">*</span></label>',
+			$content );
+		
+		return $content;
 	}
 	
 	/**
@@ -158,6 +188,14 @@ class Bricks_Comments_Addon {
 				],
 			],
 			'required'    => [ 'bcaCommentFormFirst', '!=', '' ],
+		];
+		
+		$controls['bcaFormLabel'] = [
+			'tab'     => 'content',
+			'group'   => 'bcaCustomGroup',
+			'label'   => esc_html__( 'Form label', 'bricks' ),
+			'type'    => 'text',
+			'default' => 'Comment',
 		];
 		
 		return $controls;
