@@ -2,7 +2,7 @@
 
 I wanted the comments form to appear above the list of comments, so I added a control to the comment element.
 
-![image](assets/screenshot-bricks-editor.jpg)
+![image](assets/screenshot-bricks-editor-custom-area.jpg)
 
 ## Technical stuff
 
