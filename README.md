@@ -9,7 +9,7 @@ I wanted the comments form to appear above the list of comments, so I added a co
 If the setting is true, the elements `.comments-title` and `.comment-list` will be wrapped with `<div
 class="comments__wrapper"></div>` and a CSS file will be enqueued.
 
-It also ass a skiplink to the comments form right after `<div id='comments'>`.
+It also adds a skiplink to the comments form right after `<div id='comments'>`.
 
 ### CSS
 
