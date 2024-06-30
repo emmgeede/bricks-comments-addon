@@ -6,13 +6,9 @@ I wanted the comments form to appear above the list of comments, so I added a co
 
 ## Technical stuff
 
-To achive this the plugin simply determins if the box is checked. If so, it registers two files (a JS and a CSS).
-
-### JS
-
-Nothing special here. Just wrapping the `.comments-title` and `.comment-list` with `<div
-class="comments__wrapper"></div>`. This automatically bringt up the form in front of the comments listing.
+If the setting is true, the elements `.comments-title` and `.comment-list` will be wrapped with `<div
+class="comments__wrapper"></div>` and a CSS file will be enqueued.
 
 ### CSS
 
-Just giving the `.comments__wrapper` a little `margin-top: 40px`
+The `.bricks-comments-inner` will get `display: grid` and `.comments_wrapper`will get `order: 1`.
